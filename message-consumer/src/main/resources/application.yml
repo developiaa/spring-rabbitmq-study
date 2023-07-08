@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: cut-quiz-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/rabbitmq
+    username: root
+    password: password
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: password
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8081
