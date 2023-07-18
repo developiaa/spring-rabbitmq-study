@@ -14,7 +14,7 @@ import study.developia.consumer.repository.MessageRepository;
 public class MessageService {
     private final MessageRepository messageRepository;
 
-    @RabbitListener(queues = "hello.queue")
+    @RabbitListener(queues = "hello.queue", concurrency = "3")
     public void consume(MessageDto messageDto) {
         log.info("Consume message {}", messageDto);
 
