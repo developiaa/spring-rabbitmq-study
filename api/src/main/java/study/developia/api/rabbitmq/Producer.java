@@ -11,6 +11,6 @@ public class Producer {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendMessage(Message message) {
-        rabbitTemplate.convertAndSend("hello.exchange", "hello.key", message);
+        rabbitTemplate.convertAndSend("hello.exchange2", "hello.key", message);
     }
 }

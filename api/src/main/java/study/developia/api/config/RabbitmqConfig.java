@@ -1,9 +1,6 @@
 package study.developia.api.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -34,15 +31,26 @@ public class RabbitmqConfig {
         return new Queue("hello.queue", false);
     }
 
+//    @Bean
+//    DirectExchange directExchange() {
+//        return new DirectExchange("hello.exchange");
+//    }
+
+    //    @Bean
+//    Binding binding(DirectExchange directExchange, Queue queue) {
+//        return BindingBuilder.bind(queue).to(directExchange).with("hello.key");
+//    }
     @Bean
-    DirectExchange directExchange() {
-        return new DirectExchange("hello.exchange");
+    TopicExchange topicExchange() {
+        return new TopicExchange("hello.exchange2");
     }
 
     @Bean
-    Binding binding(DirectExchange directExchange, Queue queue) {
-        return BindingBuilder.bind(queue).to(directExchange).with("hello.key");
+    Binding binding(TopicExchange topicExchange, Queue queue) {
+        return BindingBuilder.bind(queue).to(topicExchange).with("hello.key");
+
     }
+
 
     @Bean
     RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter messageConverter) {
