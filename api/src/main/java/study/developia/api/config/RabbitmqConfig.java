@@ -28,7 +28,7 @@ public class RabbitmqConfig {
 
     @Bean
     Queue queue() {
-        return new Queue("hello.queue", false);
+        return new Queue("push.queue", false);
     }
 
 //    @Bean
@@ -42,20 +42,36 @@ public class RabbitmqConfig {
 //    }
     @Bean
     TopicExchange topicExchange() {
-        return new TopicExchange("hello.exchange2");
+        return new TopicExchange("push");
     }
 
     @Bean
     Binding binding(TopicExchange topicExchange, Queue queue) {
-        return BindingBuilder.bind(queue).to(topicExchange).with("hello.key");
-
+        return BindingBuilder.bind(queue).to(topicExchange).with("partner.*");
     }
+
+    // config 설정 없이도 생성만 되어 있다면 사용할 수 있다.(Producer.java)
+//    @Bean
+//    Queue fanoutQueue() {
+//        return new Queue("fanout.queue", false);
+//    }
+//
+//    @Bean
+//    FanoutExchange fanoutExchange() {
+//        return new FanoutExchange("fanout");
+//    }
+//
+//    @Bean
+//    Binding fanoutBinding(FanoutExchange fanoutExchange, Queue queue) {
+//        return BindingBuilder.bind(queue).to(fanoutExchange);
+//    }
 
 
     @Bean
     RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter messageConverter) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(messageConverter);
+        rabbitTemplate.setExchange("push");
         return rabbitTemplate;
     }
 

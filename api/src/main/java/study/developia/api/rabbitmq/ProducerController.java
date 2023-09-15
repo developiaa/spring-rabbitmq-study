@@ -17,4 +17,16 @@ public class ProducerController {
         log.info("message={}, {}", message.getTitle(), message.getMessage());
         producer.sendMessage(message);
     }
+
+    @PostMapping("/send2")
+    public void send2(@RequestBody Message message) {
+        log.info("message2={}, {}", message.getTitle(), message.getMessage());
+        producer.sendMessageByFanout(message);
+    }
+
+    @PostMapping("/send3")
+    public void send3(@RequestBody Message message) {
+        log.info("message3={}, {}", message.getTitle(), message.getMessage());
+        producer.sendMessage2(message);
+    }
 }
