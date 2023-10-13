@@ -15,6 +15,7 @@ public class MessageService {
     private final MessageRepository messageRepository;
 
     // 똑같은 queue가 있는 경우 라운드 로빈 방식으로 실행
+    // 서버가 여러대라면 이 역시 라운드 로빈으로 동작
     @RabbitListener(queues = "push.queue", concurrency = "1")
     public void consume(MessageDto messageDto) {
         log.info("Consume message {}", messageDto);

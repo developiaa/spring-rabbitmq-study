@@ -2,3 +2,4 @@ rootProject.name = 'spring-rabbitmq-study'
 
 include "api"
 include "message-consumer"
+include "rabbitmq-config"

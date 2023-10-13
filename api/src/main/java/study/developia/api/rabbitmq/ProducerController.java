@@ -14,8 +14,11 @@ public class ProducerController {
 
     @PostMapping("/send")
     public void send(@RequestBody Message message) {
-        log.info("message={}, {}", message.getTitle(), message.getMessage());
-        producer.sendMessage(message);
+        for (int i = 0; i < 10; i++) {
+            message.setMessage(String.valueOf(i));
+            log.info("message={}, {}", message.getTitle(), message.getMessage());
+            producer.sendMessage(message);
+        }
     }
 
     @PostMapping("/send2")
